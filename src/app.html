@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Famille Franssu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: jeune, chaleureux, direct, comme une appli de messagerie familiale
+   IDEA: un carnet de famille de poche, on saute de personne en personne
+   PICTURE: la fiche de la personne au centre, parents au-dessus, enfants dessous
+   COLOUR and TYPE: blanc, encre profonde, bleu vif, une couleur par branche; Outfit + Inter
+   LAYOUT: colonne mobile, barre d'onglets en bas, cartes rondes */
+:root{color-scheme:light dark;
+--bg:light-dark(#f4f5fa,#0d1016);--card:light-dark(#ffffff,#171b23);--soft:light-dark(#eceef6,#222734);
+--ink:light-dark(#11131f,#eef0f7);--mute:light-dark(#646b80,#9aa2b6);--line:light-dark(#e3e6ef,#2a3040);
+--ac:#2f5bff;--acT:light-dark(#e8edff,#1c2447);--gold:#ffb020;--goldT:light-dark(#fff4dc,#3a2e12)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip;padding-bottom:84px}
+h1,h2,h3{font-family:Outfit,Inter,sans-serif;line-height:1.1;margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:10px;height:60px}
+.logo{font:800 21px Outfit,sans-serif;letter-spacing:-.01em;flex:1}.logo span{color:var(--ac)}
+.mechip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:4px 12px 4px 4px;min-height:44px;font-weight:600;font-size:15px}
+.av{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--c,#2f5bff);color:#fff;font:700 15px Outfit,sans-serif}
+.av.s{width:34px;height:34px;font-size:13px}.av.l{width:84px;height:84px;font-size:30px;box-shadow:0 8px 24px color-mix(in srgb,var(--c) 40%,transparent)}
+.av.ph{background:transparent;border:2px dashed var(--mute);color:var(--mute)}
+.sec{margin:22px 0 10px;font:700 13px Inter,sans-serif;color:var(--mute);display:flex;justify-content:space-between;align-items:center}
+.row{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none;scroll-snap-type:x proximity}.row::-webkit-scrollbar{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:10px}
+.pc{display:flex;align-items:center;gap:10px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 12px;min-height:60px;scroll-snap-align:start;transition:transform .15s}
+.row .pc{flex:none;max-width:240px}
+.pc:hover{transform:translateY(-2px);border-color:var(--c,var(--ac))}
+.pc b{display:block;font-weight:600;font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc small{display:block;color:var(--mute);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc .t{min-width:0}.pc.me{border:2px solid var(--gold);background:var(--goldT)}
+.pill{display:inline-block;background:var(--acT);color:var(--ac);font-weight:600;font-size:13px;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.pill.g{background:var(--goldT);color:light-dark(#8a5a00,#ffcf6b)}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:86px;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--c) 45%,var(--card)));opacity:.9}
+.hero .head{position:relative;display:flex;gap:16px;align-items:flex-end;margin-top:22px}
+.hero .av.l{border:4px solid var(--card)}
+.hero h1{font-size:clamp(26px,6vw,34px);font-weight:800;letter-spacing:-.01em}
+.hero .sur{color:var(--mute);font-weight:500;font-size:16px;margin-top:2px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.hero p{margin:10px 0 0;color:light-dark(#2b3045,#cfd4e2)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn{min-height:44px;border-radius:14px;padding:10px 16px;font-weight:600;border:1px solid var(--line);background:var(--soft)}
+.btn.p{background:var(--ac);border-color:var(--ac);color:#fff}.btn.g{background:var(--gold);border-color:var(--gold);color:#241800}
+.crumbs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none}.crumbs::-webkit-scrollbar{display:none}
+.crumbs button{flex:none;border:0;background:var(--soft);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600;min-height:34px;color:var(--mute)}
+.crumbs button:hover{color:var(--ink)}
+.empty{color:var(--mute);font-size:14px;padding:6px 2px}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+nav.tabs button{border:0;background:none;min-height:64px;display:grid;place-items:center;gap:2px;font-size:12px;font-weight:600;color:var(--mute)}
+nav.tabs button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button[aria-current=page]{color:var(--ac)}
+.search{position:relative;margin:16px 0 6px}
+.search input{width:100%;font:inherit;font-size:17px;min-height:54px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:12px 16px 12px 46px}
+.search svg{position:absolute;left:15px;top:16px;width:22px;height:22px;stroke:var(--mute);fill:none;stroke-width:2}
+.list{display:grid;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 12px;font-size:14px;font-weight:600;min-height:36px}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;text-align:left}
+.stat b{display:block;font:800 30px Outfit,sans-serif;color:var(--ac);line-height:1}.stat span{font-size:14px;color:var(--mute)}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--line)}
+.tl li{position:relative;margin-bottom:8px}.tl .pc{width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:12px}
+.card h3{font-size:20px;margin-bottom:6px}.card p{margin:6px 0 0;color:light-dark(#2b3045,#cfd4e2)}
+.when{font:700 13px Inter,sans-serif;color:var(--ac)}
+.arms{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center}
+.small{font-size:13px;color:var(--mute)}
+.small a{color:var(--ac)}
+.welcome{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:auto}
+.welcome .wrap{padding-top:clamp(30px,8vh,80px);padding-bottom:40px}
+.welcome h1{font-size:clamp(34px,9vw,52px);font-weight:800;letter-spacing:-.02em}
+.welcome h1 span{color:var(--ac)}
+.welcome p.lead{font-size:18px;color:var(--mute);margin:12px 0 0;max-width:30ch}
+.blob{display:flex;gap:-8px;margin-bottom:22px}.blob .av{margin-right:-10px;border:3px solid var(--bg)}
+.tctl{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;align-items:center;padding:12px 0 8px}
+.seg{flex:none;display:flex;background:var(--soft);border-radius:99px;padding:3px}
+.seg button{border:0;background:none;border-radius:99px;padding:7px 12px;font-weight:600;font-size:14px;min-height:38px;color:var(--mute)}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.ib{flex:none;border:1px solid var(--line);background:var(--card);border-radius:12px;min-width:42px;min-height:42px;font-weight:700;font-size:15px;padding:0 10px}
+.treebox{position:relative;margin:0 -16px}
+.tree{height:calc(100dvh - 60px - 64px - 66px);min-height:360px;overflow:auto;cursor:grab;touch-action:pan-x pan-y;
+ background:radial-gradient(circle at 1px 1px,var(--line) 1.2px,transparent 1.6px) 0 0/22px 22px}
+.tree svg{display:block}
+.tn{cursor:pointer}.tn rect{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+.tn:hover rect{stroke:var(--ac)}
+.tn.anc rect{stroke:var(--gold);stroke-width:2.5}.tn.me rect{stroke:var(--gold);stroke-width:4;fill:var(--goldT)}.tn.sel rect{stroke:var(--ac);stroke-width:3}
+.tn.ph rect{stroke-dasharray:5 4;fill:transparent}
+.tn .n{font:700 15px Outfit,sans-serif;fill:var(--ink)}.tn .s{font:500 12px Inter,sans-serif;fill:var(--mute)}.tn .y{font:600 12px Inter,sans-serif;fill:var(--mute)}
+.tn .i{font:700 13px Outfit,sans-serif;fill:#fff}
+.tg{cursor:pointer}.tg circle{fill:var(--ac)}.tg text{font:700 12px Inter,sans-serif;fill:#fff}.tg.o circle{fill:var(--soft);stroke:var(--line)}.tg.o text{fill:var(--mute)}
+.ed{fill:none;stroke:var(--line);stroke-width:2.2}.ed.u{stroke-dasharray:6 5}.ed.hi{stroke:var(--gold);stroke-width:4}
+.zoom{position:absolute;right:16px;bottom:16px;display:grid;gap:8px;z-index:3}
+.zoom button{width:52px;height:52px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:700 26px Outfit,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.14);display:grid;place-items:center}
+.zoom button:active{transform:scale(.94)}
+.zoom svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+.sheet:not([hidden])~.x{}
+.sheet{position:fixed;left:0;right:0;bottom:64px;z-index:7;padding:0 12px 12px;pointer-events:none}
+.sheet .in{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.18);padding:14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center;pointer-events:auto;animation:up .2s ease}
+.sheet b{font:700 18px Outfit,sans-serif}.sheet small{color:var(--mute);display:block}
+.sheet .acts{grid-column:1/-1;margin-top:8px}
+.sheet .x{position:absolute;right:20px;margin-top:-4px;border:0;background:none;font-size:22px;color:var(--mute);min-width:44px;min-height:44px}
+@keyframes up{from{transform:translateY(20px);opacity:0}}
+nav.tabs .wrap{grid-template-columns:repeat(5,1fr)!important}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="welcome" id="welcome" hidden>
+ <div class="wrap">
+  <div class="blob" id="blob"></div>
+  <h1>Bienvenue dans la <span>famille</span>.</h1>
+  <p class="lead">Dis-nous qui tu es : on te montre ta place, tes cousins et tes ancêtres.</p>
+  <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="wq" type="search" placeholder="Tape ton prénom" autocomplete="off" aria-label="Ton prénom"></div>
+  <div class="list" id="wres"></div>
+  <p><button class="btn" id="skip">Explorer sans choisir</button></p>
+ </div>
+</div>
+
+<header class="top"><div class="wrap">
+ <div class="logo">Famille <span>Franssu</span></div>
+ <button class="mechip" id="mechip" aria-label="Changer qui je suis"></button>
+</div></header>
+
+<main class="wrap">
+ <section id="v-tree" hidden>
+  <div class="tctl"><div class="seg" role="group" aria-label="Côté"><button data-tm="F" aria-pressed="true">Franssu</button><button data-tm="M" aria-pressed="false">Mac Mahon</button></div>
+   <button class="ib" id="tfind" aria-label="Me trouver">Moi</button><button class="ib" id="tall">Tout</button><button class="ib" id="tnone">Replier</button></div>
+  <div class="treebox"><div class="tree" id="tree"></div><div class="zoom"><button id="tzi" aria-label="Zoomer">+</button><button id="tzo" aria-label="Dézoomer">−</button><button id="tfit" aria-label="Voir tout l’arbre" class="fit"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>
+ </section>
+ <section id="v-explore" hidden></section>
+ <section id="v-search" hidden>
+  <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Prénom, nom, année..." autocomplete="off" aria-label="Chercher"></div>
+  <div class="chips" id="filters"></div>
+  <div class="list" id="res"></div>
+ </section>
+ <section id="v-me" hidden></section>
+ <section id="v-story" hidden></section>
+</main>
+
+<div class="sheet" id="sheet" hidden></div>
+<nav class="tabs" aria-label="Navigation"><div class="wrap">
+ <button data-tab="tree"><svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="5" rx="1.5"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.5"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.5"/><path d="M12 7.5v4.5M5.5 16.5V12h13v4.5"/></svg>Arbre</button>
+ <button data-tab="explore"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v5M12 12.5 5 16.5M12 12.5l7 4"/></svg>Fiche</button>
+ <button data-tab="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Chercher</button>
+ <button data-tab="me"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Famille</button>
+ <button data-tab="story"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 8h6"/></svg>Histoire</button>
+</div></nav>
+
+<script>
+/*CORE*/
+/*FIC*/
+/* ================= interface ================= */
+const $=id=>document.getElementById(id);
+const BR={p2:'#ff6b4a',p51:'#14a394',p62:'#f29a00',p89:'#2f7bff',p121:'#c04bd8',p174:'#22a447',p197:'#ff3d7f'};
+function colorOf(id){const c=chain(id);if(c.at(-1)==='jbm')return '#5b5bff';const b=c.find(x=>BR[x]);return b?BR[b]:id==='p1'?'#2f5bff':'#9a7b4f'}
+const PART=/^(de|du|des|d'|la|le|van)$/i;
+function ini(n){const w=n.replace(/[()]/g,'').split(/\s+/).filter(x=>x&&!PART.test(x)&&!/^d'/i.test(x));return ((w[0]||'?')[0]+(w[1]?w[1][0]:'')).toUpperCase()}
+const iniK=k=>{const {p,s}=keyP(k);if(p.ph&&!s)return '?';return ini(s?s.name:p.first+' '+(p.sur||'').split(' ').filter(x=>!PART.test(x)).pop())};
+let me=null,cur=null,tab='explore',hist=[];
+try{const s=localStorage.getItem('franssu-me3');if(s&&by[s.split('~')[0]])me=s}catch(e){}
+
+/* relation courte, pour les badges */
+function relShort(k){if(!me)return '';if(k===me)return 'Toi';
+ const M=keyP(me),O=keyP(k);
+ if(O.s){if(!M.s&&M.p===O.p)return M.p.sex==='m'?'Ta femme':M.p.sex==='f'?'Ton mari':'Ton conjoint';
+  const ma0=ancM(M.p.id),i=+k.split('~')[1];
+  if(ma0.has(O.p.id)&&ma0.get(O.p.id)>0){const a=ma0.get(O.p.id);const kid=a===1?M.p:null;const ok=kid?(kid.otherName?O.s.name===kid.otherName:i===0):i===0;
+   if(ok){const r=lab({sex:O.p.sex==='m'?'f':O.p.sex==='f'?'m':'u'},a,0)[0].replace(/^(ton|ta) /,'');return (M.s?'Par alliance · ':'')+r.charAt(0).toUpperCase()+r.slice(1)}}
+  return 'Par alliance'}
+ if(M.s&&M.p===O.p)return M.p.sex==='f'?'Ta femme':'Ton mari';
+ const ma=ancM(M.p.id),mb=ancM(O.p.id);let c=null,best=1e9;mb.forEach((b,x)=>{if(ma.has(x)&&ma.get(x)+b<best){best=ma.get(x)+b;c=x}});
+ if(!c)return '';MEID=M.p.id;CC=c;const a=ma.get(c),b=mb.get(c);
+ let r;if(a>=2&&b>=2&&a!==b)r=Math.abs(a-b)===1?(a<b?g(O.p,'Petit-cousin','Petite-cousine','Petit-cousin(e)'):g(O.p,'Cousin de tes parents','Cousine de tes parents','Cousin(e) de tes parents')):g(O.p,'Cousin éloigné','Cousine éloignée','Cousin(e) éloigné(e)');
+ else{r=lab(O.p,a,b)[0].replace(/^(ton|ta) /,'');r=r.charAt(0).toUpperCase()+r.slice(1)}
+ return (M.s?'Par alliance · ':'')+r}
+const yrK=k=>{const {p,s}=keyP(k);if(s){const b=yr(s.b),d=yr(s.d);return b&&d?b+'-'+d:b||''}return p.yr||''};
+function pc(k,opt={}){const {p,s}=keyP(k);const r=relShort(k),y=yrK(k);
+ const sub=opt.sub??[y,r].filter(Boolean).join(' · ');
+ return `<button class="pc${k===me?' me':''}" data-go="${k}" style="--c:${colorOf(p.id)}"><span class="av${opt.sm?' s':''}${p.ph&&!s?' ph':''}">${esc(iniK(k))}</span><span class="t"><b>${esc(opt.full?nameK(k):(s?s.name:p.first))}</b><small>${esc(sub)}</small></span></button>`}
+const lkK=k=>{const {p,s}=keyP(k);return s&&s.pid?s.pid:k};
+
+/* ---------- Explorer ---------- */
+function explore(){const k=cur||me||'p1';const {p,s}=keyP(k);const el=$('v-explore');const col=colorOf(p.id);
+ const r=relShort(k);let h='';
+ const anc=chain(p.id).slice(1).reverse();
+ h+=`<div class="crumbs" aria-label="Lignée">${anc.map(x=>`<button data-go="${x}">${esc(by[x].first)}</button>`).join('')}${s?`<button data-go="${p.id}">${esc(p.first)}</button>`:''}</div>`;
+ if(s){
+  h+=`<div class="hero" style="--c:${col}"><div class="head"><span class="av l">${esc(iniK(k))}</span><div><h1>${esc(s.name)}</h1><div class="sur">${g(p,'Épouse','Époux','Conjoint(e)')} ${/^[aeiouéèh]/i.test(p.first)?'d’':'de '}${esc(name(p))}</div></div></div>
+  <div class="meta">${r?`<span class="pill${r==='Toi'?' g':''}">${esc(r)}</span>`:''}${yrK(k)?`<span class="pill">${esc(yrK(k))}</span>`:''}${s.m?`<span class="pill">Mariés en ${esc(s.m)}</span>`:''}</div>
+  <p>${esc(s.bio||s.role||'Fiche à compléter.')}</p><div class="acts">${k===me?'':`<button class="btn g" data-me="${k}">C’est moi</button>`}</div></div>`;
+  h+=`<div class="sec">En couple avec</div><div class="grid">${pc(p.id,{full:1})}</div>`;
+  if(p.kids.length&&p.sp[0]===s)h+=`<div class="sec">Enfants <span>${p.kids.length}</span></div><div class="grid">${p.kids.map(x=>pc(x)).join('')}</div>`;
+  el.innerHTML=h;return}
+ const par=p.par&&by[p.par];
+ const parents=[];if(par){parents.push(par.id);if(p.par2)parents.push(p.par2);else if(par.sp.length){const i=p.otherName?Math.max(0,par.sp.findIndex(q=>q.name===p.otherName)):0;parents.push(par.id+'~'+i)}}
+ if(parents.length)h+=`<div class="sec">Parents</div><div class="grid">${parents.map(x=>pc(lkK(x))).join('')}</div>`;
+ h+=`<div class="hero" style="margin-top:${parents.length?18:8}px;--c:${col}"><div class="head"><span class="av l${p.ph?' ph':''}">${esc(iniK(k))}</span><div><h1>${esc(p.first)}</h1><div class="sur">${esc(p.sur||'')}</div></div></div>
+ <div class="meta">${r?`<span class="pill${r==='Toi'?' g':''}">${esc(r)}</span>`:''}${p.yr?`<span class="pill">${esc(p.yr)}</span>`:''}${p.role?`<span class="pill">${esc(p.role)}</span>`:''}${p.u?'<span class="pill">Lien à vérifier</span>':''}</div>
+ <p>${esc(bio(p))}</p>
+ <div class="acts">${p.ph||k===me?'':`<button class="btn g" data-me="${k}">C’est moi</button>`}<button class="btn p" data-intree="${p.id}">Voir dans l\u2019arbre</button>${me&&k!==me&&!p.ph?`<button class="btn" data-go="${me}">Revenir à moi</button>`:''}</div></div>`;
+ const sps=p.sp.map((q,i)=>lkK(p.id+'~'+i));
+ if(sps.length)h+=`<div class="sec">${sps.length>1?'Conjoints':p.sex==='m'?'Sa femme':p.sex==='f'?'Son mari':'Conjoint'}</div><div class="grid">${sps.map(x=>pc(x,{full:1})).join('')}</div>`;
+ const kids=p.kids2||p.kids;
+ if(kids.length)h+=`<div class="sec">Enfants <span>${p.nk&&p.nk>kids.length?kids.length+' sur '+p.nk:kids.length}</span></div><div class="grid">${kids.map(x=>pc(x,{sub:[by[x].yr,by[x].kids.length?(desc(x))+' desc.':''].filter(Boolean).join(' · ')||relShort(x)})).join('')}</div>`;
+ const sib=par?par.kids.filter(x=>x!==p.id):[];
+ if(sib.length)h+=`<div class="sec">Frères et sœurs <span>${sib.length}</span></div><div class="row">${sib.map(x=>pc(x)).join('')}</div>`;
+ el.innerHTML=h}
+
+/* ---------- Chercher ---------- */
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const ALL=withSpAll();function withSpAll(){return D.flatMap(p=>p.ph?[]:[p.id,...p.sp.flatMap((s,i)=>s.pid?[]:[p.id+'~'+i])])}
+const FIL=[['tous','Tout le monde'],['p1','Descendants de Michel'],['jbm','Côté Mac Mahon'],['old','Avant 1900']];let fil='tous';
+function search(){const v=norm($('q').value.trim());
+ let r=ALL.filter(k=>{const {p,s}=keyP(k);if(fil==='old')return !s&&+yr(p.b||'')>0&&+yr(p.b||'')<1900||(!s&&!p.b&&H.includes(p));if(fil!=='tous'&&(s||!chain(p.id).includes(fil)))return false;return true});
+ if(v)r=r.filter(k=>norm(nameK(k)+' '+yrK(k)).includes(v));
+ const n=r.length;r=r.slice(0,60);
+ $('res').innerHTML=(n?`<div class="small">${n} personne${n>1?'s':''}</div>`:'<div class="empty">Personne trouvée. Essaie un autre prénom.</div>')+r.map(k=>pc(k,{full:1})).join('')+(n>60?`<div class="empty">Affine ta recherche pour voir les ${n-60} autres.</div>`:'')}
+
+/* ---------- Ma famille ---------- */
+function mine(){const el=$('v-me');if(!me){el.innerHTML=`<div class="card" style="margin-top:16px"><h3>Qui es-tu ?</h3><p>Choisis-toi pour voir ta lignée et tes cousins.</p><div class="acts"><button class="btn p" id="pick">Me choisir</button></div></div>`;return}
+ const {p,s}=keyP(me);const base=p.id;const ma=ancM(base);
+ const cnt={sib:[],ou:[],cg:[],nn:[],cig:[],tot:0};
+ D.forEach(q=>{if(q.ph||q.id===base)return;const mb=ancM(q.id);let c=null,best=1e9;mb.forEach((b,x)=>{if(ma.has(x)&&ma.get(x)+b<best){best=ma.get(x)+b;c=x}});if(!c)return;cnt.tot++;
+  const a=ma.get(c),b=mb.get(c);if(a===1&&b===1)cnt.sib.push(q.id);else if(a===2&&b===1)cnt.ou.push(q.id);else if(a===2&&b===2)cnt.cg.push(q.id);else if(a===1&&b===2)cnt.nn.push(q.id);else if(a===3&&b===3)cnt.cig.push(q.id)});
+ let h=`<div class="hero" style="--c:${colorOf(base)};margin-top:16px"><div class="head"><span class="av l">${esc(iniK(me))}</span><div><h1>${esc(s?s.name.split(' ')[0]:p.first)}</h1><div class="sur">${esc(s?'en couple avec '+name(p):p.sur)}</div></div></div>
+ <p>${s?'Voici la famille de '+esc(p.first)+', ta belle-famille.':'Voici ta place dans la famille.'}</p></div>`;
+ h+=`<div class="sec">Ta famille en chiffres</div><div class="stats">
+ <div class="stat"><b>${cnt.tot}</b><span>parents connus</span></div>
+ <div class="stat"><b>${cnt.cg.length}</b><span>cousins germains</span></div>
+ <div class="stat"><b>${cnt.cig.length}</b><span>cousins issus de germain</span></div>
+ <div class="stat"><b>${Math.max(...[...ma.values()])}</b><span>générations d'ancêtres</span></div></div>`;
+ const grp=(t,ids)=>ids.length?`<div class="sec">${t} <span>${ids.length}</span></div><div class="row">${ids.map(x=>pc(x)).join('')}</div>`:'';
+ h+=grp('Frères et sœurs',cnt.sib)+grp('Oncles et tantes',cnt.ou)+grp('Cousins germains',cnt.cg)+grp('Neveux et nièces',cnt.nn);
+ const tl=(title,ids)=>`<div class="sec">${title}</div><ol class="tl">${ids.map(x=>`<li>${pc(x,{full:1})}</li>`).join('')}<li>${pc(me,{full:1})}</li></ol>`;
+ const a1=chain(base).slice(1).reverse();
+ h+=tl('Ta lignée '+(a1.some(x=>by[x].sur&&/Franssu/.test(by[x].sur))?'Franssu':''),a1);
+ const via=[base,...chain(base).slice(1)].find(x=>by[x].par2);
+ if(via){const a2=chain(by[via].par2).reverse();h+=tl('Ta lignée Touchet et Mac Mahon',a2.concat(chain(base).slice(0,chain(base).indexOf(via)+1).reverse().filter(x=>x!==base)))}
+ el.innerHTML=h}
+
+/* ---------- Histoire ---------- */
+function story(){const el=$('v-story');if(el.dataset.ok)return;el.dataset.ok=1;
+ const nP=ALL.length;
+ el.innerHTML=`<div class="stats" style="margin-top:16px"><div class="stat"><b>${nP}</b><span>personnes</span></div><div class="stat"><b>1350</b><span>premier seigneur connu</span></div><div class="stat"><b>2</b><span>grandes lignées</span></div></div>
+ <div class="sec">Le château de Fransu</div>
+ ${SEIG.map(s=>`<div class="card"><div class="when">${s.y}</div><h3>${s.t}</h3><p>${s.b}</p></div>`).join('')}
+ <div class="card"><div class="when">1737 à 1808</div><h3>Des Wignier aux Douville</h3><p>Jacques-Adrien Wignier achète Fransu et prend le nom du lieu. Sa fille Marie-Charlotte en hérite, puis sa petite-fille Adrienne, épouse d'Alain-Nicolas Douville, lègue le domaine en 1808 à Armand, premier Douville de Franssu.</p><div class="acts"><button class="btn" data-go="jaw">Voir Jacques-Adrien</button><button class="btn" data-go="adf">Voir Armand</button></div></div>
+ <div class="card"><div class="when">1920</div><h3>Michel et Agnès</h3><p>Leurs sept enfants, Maurice, Angilbert, Addy, Christian, Paule, Philippe et Xavier, sont à l'origine de toutes les branches d'aujourd'hui.</p><div class="acts"><button class="btn" data-go="p1">Voir la famille</button></div></div>
+ <div class="sec">Les Mac Mahon</div>
+ <div class="card"><div class="when">1749 à aujourd'hui</div><h3>De l'Irlande à l'Élysée</h3><p>Jean-Baptiste de Mac Mahon, médecin irlandais, s'installe à Autun. Son petit-fils Patrice devient maréchal de France puis président de la République de 1873 à 1879. Son arrière-petite-fille Chantal de Touchet épouse Xavier Douville de Franssu : ses descendants descendent aussi du maréchal.</p><div class="acts"><button class="btn" data-go="pmm">Voir le maréchal</button><button class="btn" data-go="cdt">Voir Chantal</button></div></div>
+ <div class="sec">Grands récits</div>
+ <div class="card"><div class="when">25 octobre 1906 · Mauritanie</div><h3>Henri à Niémélane</h3><p>Lieutenant d'infanterie coloniale, Henri, le frère aîné de Michel, codirige une reconnaissance face à une bande venue de l'Adrar. Le détachement, trop faible, est submergé : Henri tombe avec son camarade Andrieux. Le combat figure dans le journal de marche de la colonne Gouraud.</p><div class="acts"><button class="btn" data-go="hdf">Voir Henri</button></div></div>
+ <div class="card"><div class="when">1915 · Belgique</div><h3>Maurice à Ypres</h3><p>Sous-lieutenant au 32e régiment d'infanterie, le petit frère de Michel est tué près d'Ypres à 21 ans. Légion d'honneur et croix de guerre, il repose dans la chapelle familiale de Fransu.</p><div class="acts"><button class="btn" data-go="mau">Voir Maurice</button></div></div>
+ <div class="card"><div class="when">18 août 1932 · Mauritanie</div><h3>Patrick à Oum Tounsi</h3><p>Le petit-fils du maréchal commande une colonne de méharistes. Embuscade au puits d'Oum Tounsi, au nord de Nouakchott : il est tué, et sa mort fait le tour de la presse mondiale.</p><div class="acts"><button class="btn" data-go="ptm">Voir Patrick</button></div></div>
+ <div class="card"><div class="when">1940 à 1944</div><h3>Deux résistants</h3><p>À 18 ans, Angilbert, fils de Michel, est résistant isolé dans la Somme avant de rejoindre l'Armée d'Afrique. Côté Touchet, Antoine, chef d'escadron, agent du réseau Alliance, est exécuté par les Allemands à la prison de Caen le jour du Débarquement.</p><div class="acts"><button class="btn" data-go="p51">Voir Angilbert</button><button class="btn" data-go="bmm~0">Voir Antoine</button></div></div>
+ <div class="card"><div class="when">Aujourd'hui</div><h3>Le château, monument historique</h3><p>Façades, toitures, grille d'honneur et parc sont protégés depuis le 18 août 2004. L'avant-corps central porte toujours les initiales D et F. En 1993, la famille rachète aussi le manoir voisin de Houdencourt et le restaure.</p></div>
+ <div class="card"><div class="when">6 juin 1944</div><h3>Antoine de Touchet, résistant</h3><p>Chef d'escadron de cavalerie, membre de l'ORA et du réseau Alliance, il est exécuté par les Allemands à la prison de Caen le jour du Débarquement.</p><div class="acts"><button class="btn" data-go="bmm~0">Voir sa fiche</button></div></div>
+ <div class="sec">Armoiries</div>
+ ${ARMS.map(a=>`<div class="card arms">${shield(a.k)}<div><h3>${a.t}</h3><p>${a.b}</p></div></div>`).join('')}
+ <div class="sec">À compléter</div>
+ <div class="card"><p>Les trois autres enfants d'Antoine de Touchet et de Brigitte de Mac Mahon. Le lien entre Nicolas Alire Douville et Adrienne Blondin de Bazonville. Les parents de Marie (1977) et d'Olivier (1981-2000). Et surtout : un petit paragraphe sur chacun.</p></div>
+ <p class="small">Sources : <a href="https://remus80.eklablog.com/fransu-a128342190">blog Remus80</a>, tableau familial Généalogie Franssu, liste de filiations Douville de Franssu, <a href="https://fr.wikipedia.org/wiki/Famille_de_Mac_Mahon">Wikipédia</a>, <a href="https://fusilles-40-44.maitron.fr/touchet-antoine-charles-marie-jules-marquis-de/">Maitron</a>, <a href="https://inventaire-qualif.hautsdefrance.fr/dossier/pdf/41cba65d-6ca6-4c1f-927a-5228ad844fd1/chateau-de-fransu.pdf">Inventaire Hauts-de-France</a>, <a href="https://www.nievresomme.fr/medias/files/fransu-de-l-usoir-a-l-eglise.pdf">Fransu, de l'usoir à l'église</a>, <a href="https://gallica.bnf.fr/ark:/12148/bpt6k54620482/texteBrut">Rapport Mauritanie 1906 (Gallica)</a>, <a href="https://fr.wikipedia.org/wiki/Emmanuel_de_Mac_Mahon">Wikipédia</a>, Geneanet, musée de la Résistance en ligne. Aucune adresse ni aucun numéro n'est repris ici.</p>`}
+
+
+/* ---------- Arbre ---------- */
+const W=230,HH=64,GX=46,GY=12,PAD=24;
+let z=1,tmode='F',tsel=null,pos={},TW=0,TH=0;const ex=new Set();
+function resetEx(){ex.clear();['jaw','mcw','abb','x1','adf','hadf','a56','p1','jbm','mfm','pmm','emm','bmm'].forEach(x=>ex.add(x));if(me){const id=keyP(me).p.id;ancM(id).forEach((_,x)=>ex.add(x));if(by[id].kids.length)ex.add(id)}}
+function tlay(){pos={};let cur=PAD,maxd=0;const root=tmode==='M'?'jbm':'jaw';
+ const rec=(id,d)=>{const p=by[id],ks=ex.has(id)?p.kids:[];maxd=Math.max(maxd,d);
+  if(ks.length){ks.forEach(k=>rec(k,d+1));pos[id]={x:PAD+d*(W+GX),y:(pos[ks[0]].y+pos[ks.at(-1)].y)/2}}
+  else{pos[id]={x:PAD+d*(W+GX),y:cur};cur+=HH+GY}};
+ rec(root,0);TW=PAD*2+(maxd+1)*(W+GX);TH=cur+PAD}
+const cut=(s,n)=>s.length>n?s.slice(0,n-1)+'…':s;
+function tdraw(){tlay();const meP=me?keyP(me).p.id:null,A=meP?new Set(ancM(meP).keys()):new Set();let e='',n='';
+ for(const id in pos){const p=by[id],P=pos[id];
+  if(ex.has(id))p.kids.forEach(k=>{const c=by[k],Q=pos[k],x1=P.x+W+16,y1=P.y+HH/2,x2=Q.x,y2=Q.y+HH/2,xm=(x1+x2)/2;
+   e+=`<path class="ed${c.u?' u':''}${A.has(id)&&A.has(k)?' hi':''}" d="M${x1} ${y1}C${xm} ${y1} ${xm} ${y2} ${x2} ${y2}"/>`});
+  const cls=(id===meP?'me':A.has(id)?'anc':'')+(tsel===id?' sel':'')+(p.ph?' ph':'');const col=colorOf(id);
+  const sp=p.sp.length?'∞ '+cut(p.sp[0].name,27):(p.role?cut(p.role,30):'');
+  n+=`<g class="tn ${cls}" data-t="${id}" tabindex="0" role="button" aria-label="${esc(name(p))}"><rect x="${P.x}" y="${P.y}" width="${W}" height="${HH}" rx="16"/>
+  <circle cx="${P.x+28}" cy="${P.y+HH/2}" r="19" fill="${p.ph?'none':col}" ${p.ph?'stroke="var(--mute)" stroke-dasharray="4 3"':''}/><text class="i" x="${P.x+28}" y="${P.y+HH/2+5}" text-anchor="middle" ${p.ph?'style="fill:var(--mute)"':''}>${esc(iniK(id))}</text>
+  <text class="n" x="${P.x+56}" y="${P.y+22}">${esc(cut(p.first,15))}</text><text class="y" x="${P.x+W-12}" y="${P.y+21}" text-anchor="end">${esc(p.yr||'')}</text>
+  <text class="s" x="${P.x+56}" y="${P.y+39}">${esc(cut(p.sur||'',25))}</text><text class="s" x="${P.x+56}" y="${P.y+55}" font-style="italic">${esc(sp)}</text></g>`;
+  if(p.kids.length){const o=ex.has(id);n+=`<g class="tg${o?' o':''}" data-tg="${id}" role="button" tabindex="0" aria-label="${o?'Replier':'Ouvrir'} la branche"><circle cx="${P.x+W+1}" cy="${P.y+HH/2}" r="15"/><text x="${P.x+W+1}" y="${P.y+HH/2+4}" text-anchor="middle">${o?'−':'+'+desc(id)}</text></g>`}}
+ $('tree').innerHTML=`<svg width="${TW*z}" height="${TH*z}" viewBox="0 0 ${TW} ${TH}">${e}${n}</svg>`}
+function tcenter(id,smooth){const P=pos[id];if(!P)return;$('tree').scrollTo({left:(P.x+W/2)*z-$('tree').clientWidth/2,top:(P.y+HH/2)*z-$('tree').clientHeight/2,behavior:smooth?'smooth':'auto'})}
+function syncTm(){document.querySelectorAll('[data-tm]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tm===tmode))}
+function tshow(id,smooth){tmode=treeOf(id);syncTm();ancM(id).forEach((_,x)=>{if(x!==id)ex.add(x)});const pr=by[id].par;if(pr)ex.add(pr);tsel=id;tdraw();requestAnimationFrame(()=>tcenter(id,smooth))}
+function sheet(id){if(!id){$('sheet').hidden=true;return}const p=by[id],r=relShort(id);
+ $('sheet').innerHTML=`<div class="in"><span class="av" style="--c:${colorOf(id)}">${esc(iniK(id))}</span><div><b>${esc(name(p))}</b><small>${esc([p.yr,r].filter(Boolean).join(' · '))}</small></div>
+ <div class="acts"><button class="btn p" data-go="${id}">Voir la fiche</button>${p.kids.length?`<button class="btn" data-tg2="${id}">${ex.has(id)?'Replier':'Voir ses '+(p.kids.length>1?p.kids.length+' enfants':'enfant')}</button>`:''}<button class="btn" data-close>Fermer</button></div></div>`;$('sheet').hidden=false}
+function toggle(id){ex.has(id)?ex.delete(id):ex.add(id);const t=$('tree'),oy=pos[id].y,sy=t.scrollTop,sx=t.scrollLeft;tdraw();t.scrollTop=sy+(pos[id].y-oy)*z;t.scrollLeft=sx}
+{const t=$('tree'),drag={on:false,moved:false};
+ t.addEventListener('pointerdown',ev=>{if(ev.pointerType!=='mouse')return;drag.on=true;drag.moved=false;drag.x=ev.clientX;drag.y=ev.clientY;drag.l=t.scrollLeft;drag.t=t.scrollTop});
+ window.addEventListener('pointermove',ev=>{if(!drag.on)return;const dx=ev.clientX-drag.x,dy=ev.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>4)drag.moved=true;t.scrollLeft=drag.l-dx;t.scrollTop=drag.t-dy});
+ window.addEventListener('pointerup',()=>{drag.on=false;setTimeout(()=>drag.moved=false,0)});
+ const act=tg=>{const g2=tg.closest('.tg');if(g2){toggle(g2.dataset.tg);return true}const nd=tg.closest('.tn');if(nd){tsel=nd.dataset.t;tdraw();sheet(tsel);return true}};
+ t.addEventListener('click',ev=>{if(!drag.moved)act(ev.target)});
+ t.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&act(ev.target))ev.preventDefault()});}
+$('sheet').addEventListener('click',ev=>{const a=ev.target.closest('[data-tg2]');if(a){toggle(a.dataset.tg2);sheet(a.dataset.tg2);return}if(ev.target.closest('[data-close]'))sheet(null)});
+document.querySelectorAll('[data-tm]').forEach(b=>b.onclick=()=>{tmode=b.dataset.tm;syncTm();sheet(null);tdraw();const mp=me&&keyP(me).p.id;tcenter(mp&&treeOf(mp)===tmode?mp:(tmode==='M'?(mp&&ancM(mp).has('cdt')?'cdt':'pmm'):'p1'),false)});
+$('tfind').onclick=()=>{if(me)tshow(keyP(me).p.id,true);else openWelcome()};
+$('tall').onclick=()=>{D.forEach(p=>p.kids.length&&ex.add(p.id));tdraw();if(tsel)tcenter(tsel)};
+$('tnone').onclick=()=>{resetEx();tsel=null;sheet(null);tdraw();if(me)tcenter(keyP(me).p.id)};
+const tz=f=>{const c=$('tree'),cx=(c.scrollLeft+c.clientWidth/2)/z,cy=(c.scrollTop+c.clientHeight/2)/z;z=Math.min(1.6,Math.max(.12,z*f));tdraw();c.scrollLeft=cx*z-c.clientWidth/2;c.scrollTop=cy*z-c.clientHeight/2};
+$('tzi').onclick=()=>tz(1.25);$('tzo').onclick=()=>tz(1/1.25);
+$('tfit').onclick=()=>{const c=$('tree');z=Math.max(.12,Math.min(1,c.clientWidth/TW,c.clientHeight/TH));tdraw();c.scrollTo({left:0,top:0})};
+{const c=$('tree');let d0=0,z0=1;const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+ c.addEventListener('touchstart',e=>{if(e.touches.length===2){d0=dist(e.touches);z0=z}},{passive:true});
+ c.addEventListener('touchmove',e=>{if(e.touches.length===2&&d0){e.preventDefault();const f=(z0*dist(e.touches)/d0)/z;if(Math.abs(f-1)>.04)tz(f)}},{passive:false});
+ c.addEventListener('touchend',()=>{d0=0});
+ c.addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();tz(e.deltaY<0?1.1:1/1.1)}},{passive:false});}
+/* ---------- navigation ---------- */
+function chip(){$('mechip').innerHTML=me?`<span class="av s" style="--c:${colorOf(keyP(me).p.id)}">${esc(iniK(me))}</span>${esc(nameK(me).split(' ')[0])}`:'<span class="av s" style="--c:#9aa2b6">?</span>Qui suis-je ?'}
+function setTab(t){tab=t;if(t!=='tree')sheet(null);['tree','explore','search','me','story'].forEach(x=>$('v-'+x).hidden=x!==t);
+ document.querySelectorAll('[data-tab]').forEach(b=>b.dataset.tab===t?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+ if(t==='tree'){tdraw();requestAnimationFrame(()=>tcenter(tsel||(me?keyP(me).p.id:'p1'),false))}if(t==='explore')explore();if(t==='search'){search();}if(t==='me')mine();if(t==='story')story();window.scrollTo({top:0})}
+function go(k){if(cur&&cur!==k)hist.push(cur);cur=k;setTab('explore')}
+function setMe(k){me=k;try{localStorage.setItem('franssu-me3',k)}catch(e){}cur=k;$('welcome').hidden=true;chip();const id=keyP(k).p.id;resetEx();tmode=treeOf(id);syncTm();tsel=id;setTab(tab==='me'?'me':'tree')}
+document.addEventListener('click',ev=>{const it=ev.target.closest('[data-intree]');if(it){setTab('tree');tshow(it.dataset.intree,false);sheet(it.dataset.intree);return}const m=ev.target.closest('[data-me]');if(m){setMe(m.dataset.me);return}
+ const b=ev.target.closest('[data-go]');if(b){if(b.closest('#wres')){setMe(b.dataset.go);return}go(b.dataset.go);return}
+ const t=ev.target.closest('[data-tab]');if(t){setTab(t.dataset.tab);if(t.dataset.tab==='search')$('q').focus();return}
+ if(ev.target.closest('#mechip')||ev.target.closest('#pick')){openWelcome()}});
+function openWelcome(){$('welcome').hidden=false;$('wq').value='';wsearch();setTimeout(()=>$('wq').focus(),50)}
+function wsearch(){const v=norm($('wq').value.trim());
+ if(!v){$('wres').innerHTML='';return}
+ const r=ALL.filter(k=>norm(nameK(k)).includes(v)).slice(0,20);
+ $('wres').innerHTML=r.map(k=>{const {p,s}=keyP(k);return pc(k,{full:1,sub:[yrK(k),s?'conjoint de '+p.first:(p.par&&!by[p.par].ph?g(p,'fils','fille','enfant')+' '+de(by[p.par].first):'')].filter(Boolean).join(' · ')})}).join('')||'<div class="empty">Personne trouvée.</div>'}
+$('wq').addEventListener('input',wsearch);
+$('skip').onclick=()=>{$('welcome').hidden=true;cur=cur||'p1';setTab('tree')};
+$('q').addEventListener('input',search);
+$('filters').innerHTML=FIL.map(([k,t])=>`<button data-f="${k}" aria-pressed="${k===fil}">${t}</button>`).join('');
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;fil=b.dataset.f;$('filters').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));search()});
+$('blob').innerHTML=['p1','pmm','p197','cdt','adf'].map(k=>`<span class="av" style="--c:${colorOf(k)}">${esc(iniK(k))}</span>`).join('');
+chip();
+resetEx();if(me){cur=me;tsel=keyP(me).p.id;tmode=treeOf(tsel);syncTm();setTab('tree')}else{cur='p1';setTab('tree');openWelcome()}
+}
+</script>
+</body>
+</html>
