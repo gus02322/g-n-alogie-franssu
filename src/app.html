@@ -78,7 +78,9 @@ nav.tabs button[aria-current=page]{color:var(--ac)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:12px}
 .card h3{font-size:20px;margin-bottom:6px}.card p{margin:6px 0 0;color:light-dark(#2b3045,#cfd4e2)}
 .when{font:700 13px Inter,sans-serif;color:var(--ac)}
-.arms{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center}
+.arms{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.arms>svg{display:block;width:140px;height:auto;flex:none}
+.arms>div{width:100%}
 .small{font-size:13px;color:var(--mute)}
 .small a{color:var(--ac)}
 .welcome{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:auto}
