@@ -13,6 +13,7 @@ Projet d'Augustin Douville de Franssu : appli web de généalogie familiale, en 
 ## Modèle de données (src/core.js)
 Chaque personne : `{id, first, sur, sex:'m'|'f'|'u', b, d, par, par2?, sp:[{name,b,d,m,role,bio,pid?}], role, bio, u, ph, nk}`.
 - `par` : parent par lequel la personne est rangée dans l'arbre. `par2` : second parent présent dans l'arbre (seuls les enfants de Xavier et Chantal en ont un).
+- `sp[].cp:1` : en couple, non mariés (affiche « compagne / compagnon » au lieu de « épouse / mari »).
 - `sp[].pid` : le conjoint existe aussi comme personne (Chantal de Touchet, id `cdt`).
 - `H` : ancêtres Wignier et Douville jusqu'à Armand (1856-1904). `HM` : lignée Mac Mahon et Touchet. `data/famille.json` : descendance de Michel (id `p1`, 1891-1958) et Agnès.
 - `UPD` : biographies enrichies par recherche web, appliquées après construction.
