@@ -2087,18 +2087,12 @@
  },
  {
   "first": "Michel",
-  "b": "27/08/1960",
+  "b": "27/05/1960",
   "par": "p197",
   "id": "p198",
-  "sp": [
-   {
-    "name": "Virginie Dupont",
-    "b": null,
-    "d": null
-   }
-  ],
   "sex": "m",
-  "sur": "Douville de Franssu"
+  "sur": "Douville de Franssu",
+  "kidsWith": "Virginie Dupont"
  },
  {
   "first": "Charles",
@@ -2135,6 +2129,14 @@
   "otherName": "Virginie Dupont",
   "otherTxt": "mariage",
   "sur": "Douville de Franssu"
+ },
+ {
+  "first": "Achille",
+  "b": "06/10/2026",
+  "par": "p200",
+  "id": "p226",
+  "sex": "m",
+  "sur": "Dumouchel de Prémare"
  },
  {
   "first": "Eole",
